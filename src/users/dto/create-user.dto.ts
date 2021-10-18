@@ -3,7 +3,7 @@ import { IsBoolean, IsEmail, IsNotEmpty, IsString } from 'class-validator';
 export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
-  userName: string;
+  username: string;
   @IsString()
   firstName: string;
   @IsEmail()
@@ -15,5 +15,4 @@ export class CreateUserDto {
   @IsNotEmpty()
   @IsString()
   password: string;
-  tasks: number[];
 }
