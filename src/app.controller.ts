@@ -17,14 +17,15 @@ export class AppController {
   async login(@Request() req) {
     return this.authService.login(req.user);
   }
-  @UseGuards(JwtAuthGuard)
   @Get('profile')
+  @UseGuards(JwtAuthGuard)
+  @Roles(Role.Admin)
   getProfile(@Request() req) {
     return req.user;
   }
   @Get('us')
   @UseGuards(JwtAuthGuard)
-  @Roles(Role.Admin)
+  // @Roles(Role.Admin)
   findAll(@Request() req) {
     return req.user;
     // return this.tasksService.findAll();

@@ -24,9 +24,12 @@ export class UsersService {
   }
 
   findOne(username: string): Promise<User> {
-    return this.usersRepository.findOne({
-      username: username,
-    });
+    return this.usersRepository.findOne(
+      {
+        username: username,
+      },
+      { relations: ['role'] },
+    );
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
