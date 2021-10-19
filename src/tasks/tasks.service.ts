@@ -1,20 +1,26 @@
+import { UsersService } from './../users/users.service';
+
 import { Task } from 'src/tasks/entities/task.entity';
-import { Injectable, Delete } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+
 @Injectable()
 export class TasksService {
   constructor(
     @InjectRepository(Task)
     private taskRepository: Repository<Task>,
+    private readonly usersService: UsersService,
   ) {}
-  create(createTaskDto: CreateTaskDto) {
-    return this.taskRepository.save(createTaskDto);
+  async create(createTaskDto: CreateTaskDto) {
+    const user = await this.usersService.findOne(createTaskDto.userName);
+    createTaskDto.user = user;
+    return await this.taskRepository.save(createTaskDto);
   }
   findAll(): Promise<Task[]> {
-    return this.taskRepository.find();
+    return this.taskRepository.find({ relations: ['user'] });
   }
   findOne(id: number): Promise<Task> {
     return this.taskRepository.findOne(id);

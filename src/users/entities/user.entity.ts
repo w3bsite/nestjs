@@ -1,5 +1,12 @@
+import { Role } from 'src/role/entities/role.entity';
 import { Task } from 'src/tasks/entities/task.entity';
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  ManyToOne,
+} from 'typeorm';
 
 @Entity()
 export class User {
@@ -7,11 +14,13 @@ export class User {
   id: number;
   @Column()
   username: string;
-  @Column()
+  @ManyToOne((type) => Role, (role) => role.users)
+  role: Role;
+  @Column({ default: 'email@gmil.com' })
   email: string;
-  @Column()
+  @Column({ default: 'firstname' })
   firstName: string;
-  @Column()
+  @Column({ default: 'lastname' })
   lastName: string;
   @Column({ default: true })
   isActive: boolean;

@@ -10,6 +10,6 @@ export class Task {
   content: string;
   @Column({ default: false })
   urgent: boolean;
-  @ManyToOne((type) => User, (user) => user.tasks)
+  @ManyToOne((type) => User, (user) => user.tasks, { cascade: true })
   user: User;
 }
