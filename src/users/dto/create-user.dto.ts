@@ -1,8 +1,8 @@
+import { Role } from 'src/role/entities/role.entity';
 import {
   IsBoolean,
   IsEmail,
   IsNotEmpty,
-  IsObject,
   IsOptional,
   IsString,
 } from 'class-validator';
@@ -11,9 +11,10 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   username: string;
-  @IsObject()
+  @IsString()
+  rolename: string;
   @IsOptional()
-  Role: unknown;
+  role: Role;
   @IsString()
   @IsOptional()
   firstName: string;
