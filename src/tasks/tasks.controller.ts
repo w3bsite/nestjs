@@ -29,8 +29,7 @@ export class TasksController {
   }
   // @UseGuards(JwtAuthGuard, RolesGuard)
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.Position)
-  @Roles(Role.Admin)
+  @Roles({ admin: 'Admin' })
   @Get()
   findAll() {
     return this.tasksService.findAll();
