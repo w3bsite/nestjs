@@ -9,9 +9,10 @@ export class RoleService {
     @InjectRepository(Role)
     private roleRepository: Repository<Role>,
   ) {}
-  findOne(role: string): Promise<Role> {
-    return this.roleRepository.findOne({
-      position: role,
-    });
+  findOne(role: string) {
+    return { position: 'admin' };
+    // return this.roleRepository.findOne({
+    //   position: role,
+    // });
   }
 }

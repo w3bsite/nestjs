@@ -11,12 +11,6 @@ import { AuthModule } from 'src/auth/auth.module';
 @Module({
   imports: [TypeOrmModule.forFeature([Task]), AuthModule, UsersModule],
   controllers: [TasksController],
-  providers: [
-    TasksService,
-    {
-      provide: APP_GUARD,
-      useClass: RolesGuard,
-    },
-  ],
+  providers: [TasksService, RolesGuard],
 })
 export class TasksModule {}

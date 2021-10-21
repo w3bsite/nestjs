@@ -14,9 +14,9 @@ export class UsersService {
     private readonly roleService: RoleService,
   ) {}
   async create(createUserDto: CreateUserDto) {
-    const role = await this.roleService.findOne(createUserDto.rolename);
-    createUserDto.role = role;
-    return this.usersRepository.save(createUserDto);
+    // const role = await this.roleService.findOne(createUserDto.rolename);
+    // createUserDto.role = role;
+    // return this.usersRepository.save(createUserDto);
   }
 
   findAll(): Promise<User[]> {

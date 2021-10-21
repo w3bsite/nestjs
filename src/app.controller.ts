@@ -3,8 +3,6 @@ import { Controller, Get, Post, UseGuards, Request } from '@nestjs/common';
 import { AppService } from './app.service';
 import { LocalAuthGuard } from './auth/auth/local-auth.guard';
 import { JwtAuthGuard } from './auth/auth/jwt-auth.guard';
-import { Roles } from './auth/roles.decorator';
-import { Role } from './enums/role.enum';
 
 @Controller()
 export class AppController {
@@ -17,19 +15,21 @@ export class AppController {
   async login(@Request() req) {
     return this.authService.login(req.user);
   }
-  @Get('profile')
+
   @UseGuards(JwtAuthGuard)
-  @Roles(Role.Admin)
+  @Get('profile')
+  // @UseGuards(JwtAuthGuard, RolesGuard)
+  // @Roles(Role.Admin)
   getProfile(@Request() req) {
     return req.user;
   }
-  @Get('us')
+
   @UseGuards(JwtAuthGuard)
-  // @Roles(Role.Admin)
+  @Get('us')
   findAll(@Request() req) {
     return req.user;
-    // return this.tasksService.findAll();
   }
+
   @Get()
   getHello(): string {
     return this.appService.getHello();
